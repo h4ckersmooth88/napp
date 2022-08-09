@@ -1,0 +1,4 @@
+[plugins."io.containerd.grpc.v1.cri".registry.configs."harborlab.seakcloud.com".tls]
+insecure_skip_verify = true
+[plugins."io.containerd.grpc.v1.cri".registry.mirrors."harborlab.seakcloud.com"]
+endpoint = ["http://harborlab.seakcloud.com"]
