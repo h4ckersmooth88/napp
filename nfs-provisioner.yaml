@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-client-provisioner
+  labels:
+    app: nfs-client-provisioner
+  # replace with namespace where provisioner is deployed
+  namespace: default  #Consistent with the namespace in the RBAC file
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfs-client-provisioner
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nfs-client-provisioner
+  template:
+    metadata:
+      labels:
+        app: nfs-client-provisioner
+    spec:
+      serviceAccountName: nfs-client-provisioner
+      containers:
+        - name: nfs-client-provisioner
+          image: quay.io/external_storage/nfs-client-provisioner:latest
+          volumeMounts:
+            - name: nfs-client-root
+              mountPath: /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME
+              value: gxf-nfs-storage  #The name of the provisioner. Make sure that the name is consistent with the provisioner name in the nfs-StorageClass.yaml file
+            - name: NFS_SERVER
+              value: 10.24.X.X    #NFS Server IP address
+            - name: NFS_PATH  
+              value: /home/nfs/1    #NFS mount volume
+      volumes:
+        - name: nfs-client-root
+          nfs:
+            server: 10.24.X.X  #NFS Server IP address
+            path: /home/nfs/1     #NFS mount volume
