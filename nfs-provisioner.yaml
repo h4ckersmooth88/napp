@@ -32,11 +32,11 @@ spec:
             - name: PROVISIONER_NAME
               value: gxf-nfs-storage  #The name of the provisioner. Make sure that the name is consistent with the provisioner name in the nfs-StorageClass.yaml file
             - name: NFS_SERVER
-              value: 10.24.X.X    #NFS Server IP address
+              value: 192.168.229.10    #NFS Server IP address
             - name: NFS_PATH  
-              value: /home/nfs/1    #NFS mount volume
+              value: /kube    #NFS mount volume
       volumes:
         - name: nfs-client-root
           nfs:
-            server: 10.24.X.X  #NFS Server IP address
-            path: /home/nfs/1     #NFS mount volume
+            server: 192.168.229.10  #NFS Server IP address
+            path: /kube     #NFS mount volume
