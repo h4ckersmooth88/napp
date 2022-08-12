@@ -1,0 +1,8 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: managed-nfs-storage
+provisioner: gxf-nfs-storage #The name here should be the same as the environment variable provider in the provisioner configuration file_ Name consistent
+reclaimPolicy: Retain # The default is delete
+parameters:
+  archiveOnDelete: "true" # false means that when pv is deleted, the corresponding folder under nfs will also be deleted. true is the opposite
