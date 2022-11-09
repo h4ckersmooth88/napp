@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Create Self-Signed OpenSSL Certs
 mkdir -p /home/$MAINUSER/harbor_install
 mkdir -p /home/$MAINUSER/harbor_install/openssl
